@@ -1,0 +1,80 @@
+	
+	
+	====================================================================================================
+	
+	DBS <---> ACAU Communication structure
+
+	Byte (hex)
+	-----------------------------
+	00 -- Preamble = A5
+	
+
+	01 -- Packet Type
+		00 - Status Request (ping)
+			Sub-type
+			01 -- Reply
+		10 - Command Packet
+			Sub-type
+			11 - General Command
+				* arg0 = command number
+				* arg1 = 
+				* arg2 = 
+			12 - Change data mode (command)
+				* arg0 = mode to change to
+					1) Idle mode
+					2) Set Codes
+					3) Set Action Descriptors
+					4) Set Strings
+					9) Get Audit
+		20 - Data Packet
+	02 -- Data Size (if zero, no data or record numbers later)
+	
+	03 -- Record Number H  (RECPOSH)
+	04 -- Record Number L  (RECPOSL)
+	
+	05 -- Data 00 -- cmd arg0
+	06 -- Data 01 -- cmd arg1
+	07 -- Data 02 -- cmd arg2
+	08 -- Data 03
+	09 -- Data 04
+	0A -- Data 05
+	0B -- Data 06
+	0C -- Data 07
+	0D -- Data 08
+	0E -- Data 09
+	0F -- Data 0A
+	10 -- Data 0B
+	11 -- Data 0C
+	12 -- Data 0D
+	13 -- Data 0E
+	14 -- Data 0F
+	
+	15 -- Checksum
+	
+	
+	
+	*** PING ***
+	Sample dialog 
+	
+	DBS --> ACAU: A5 00 00 5B = Ping request
+	
+	ACAU --> DBS: A5 01 00 5A = Ping response
+	
+	
+	
+	*** Card list ***
+	Sample dialog
+	
+	DBS --> ACAU:
+	A5 12 01 00 00 02 47                                  = Set data mode to rfid codes
+	A5 20 0B 00 00 01 30 39 33 42 39 30 31 35 37 43 05    = record 0 set to action 01 and code "093B90157C" 
+	A5 20 05 00 01 02 35 36 39 38 A9                      = record 1 set to action 02 and code "5698" 
+	A5 12 01 00 00 01 B9                                  = Set mode to idle mode
+	
+	
+	
+	
+	
+	
+	
+	
