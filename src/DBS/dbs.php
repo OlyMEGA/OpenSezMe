@@ -1,35 +1,44 @@
 <?php
 
-include "../../lib/php_serial.class.php";
+include "../../lib/php/php_serial.class.php";
 
 class dbs
 {
 	// Let's start the class
-	$serial = new phpSerial;
+    public $serial;
 
-	function dbs() {
-		$serial->deviceSet("/dev/cu.usbmodem12341");
-		$serial->confBaudRate(9600);
-		$serial->confParity("none");
-		$serial->confCharacterLength(8);
-		$serial->confStopBits(1);
-		$serial->confFlowControl("none");
-		$serial->deviceOpen();		
+    function dbs() {
+        $this->serial = new phpSerial;
+
+        $mySerial = $this->serial;
+        $mySerial->deviceSet("/dev/cu.usbmodem12341");
+		$mySerial->confBaudRate(9600);
+		$mySerial->confParity("none");
+		$mySerial->confCharacterLength(8);
+		$mySerial->confStopBits(1);
+		$mySerial->confFlowControl("none");
+		$mySerial->deviceOpen();
 	}
 
-	//$serial->sendMessage("H");
+    function go()
+    {
+        $mySerial = $this->serial;
 
-	// Or to read from
-	while (true) {
-	    $read = $serial->readPort();
-	    if ($read != null) {
-	        print($read);
-	        $serial->sendMessage("H");
-	    }
-	}
+        //$serial->sendMessage("H");
 
-	// If you want to change the configuration, the device must be closed
-	$serial->deviceClose();
+        // Or to read from
+        while (true) {
+            $read = $mySerial->readPort();
+            if ($read != null) {
+                print($read);
+                $mySerial->sendMessage("H");
+            }
+        }
+
+        // If you want to change the configuration, the device must be closed
+        $mySerial->deviceClose();
+
+    }
 }
 
 ?>
