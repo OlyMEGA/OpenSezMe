@@ -4,9 +4,6 @@ ENTER EVENT CODE
 INTRODUCE CODÏGO
 
 
-"Suzanne Bushey" <sbushey@bowlescorp.com>, "Jean Lasher" <jlasher@bowlescorp.com>
-"David Bowles" <dbowles@bowlescorp.com>, 
-
 S20R06P S21R06P S40R06P S41R06P 
 
 S02R06P S04R06P 
